@@ -2,19 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages the input and movement for the player character.
+/// This script should stay shorter than 200 lines.
+/// </summary>
 public class PlayerController : MonoBehaviour {
+    public static PlayerController Instance;
+
     Rigidbody rb;
     AbilityManager abilityManager;
 
     private bool m_isGrounded = false;
 
+    public float m_normalMoveSpeed = 30f;
     public float m_moveSpeed = 30f;
+    public float m_runMultiplyFactor = 3f;
     public float m_turnSpeed = 2f;
     public float m_maxSpeed = 5f;
     public float m_jumpPower = 0f;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    // Use this for initialization
+    void Start () {
         rb = GetComponent<Rigidbody>();
         abilityManager = GetComponent<AbilityManager>();
     }
@@ -32,9 +45,21 @@ public class PlayerController : MonoBehaviour {
         Vector3 cameraRight = Camera.main.transform.TransformDirection(Vector3.right) * 10;
         Vector3 cameraRightNoY = new Vector3(cameraRight.x, 0, cameraRight.z);
 
+        //running
+        if (abilityManager.canRun)
+        {
+            if (Input.GetAxis("Fire3") > 0.1f)
+            {
+                m_moveSpeed = Mathf.Lerp(m_moveSpeed, m_normalMoveSpeed * m_runMultiplyFactor, 2f * Time.deltaTime);
+            }
+            else
+            {
+                m_moveSpeed = m_normalMoveSpeed;
+            }
+        }
+
         //movement
         rb.AddForce(m_moveSpeed * (verticalInput * cameraForwardNoY));
-
         transform.Rotate(horizontalInput * Vector3.up);
 
         //limit the velocity
