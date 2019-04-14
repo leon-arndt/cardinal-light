@@ -30,4 +30,12 @@ public class Enemy : MonoBehaviour {
             transform.position = Vector3.MoveTowards(transform.position, playerPos, Time.deltaTime * m_moveSpeed);
         }
 	}
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.transform.GetComponent<PlayerController>() != null)
+        {
+            collision.transform.GetComponent<PlayerController>().TakeDamage(10f * Time.deltaTime);
+        }
+    }
 }

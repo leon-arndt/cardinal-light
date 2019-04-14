@@ -6,10 +6,8 @@ public class UIController : MonoBehaviour {
     public Text timeText;
     public static UIController Instance;
 
-    private void Start()
+    private void Awake()
     {
         Instance = this;
-
-        timeText.text = "No mission";
     }
 }

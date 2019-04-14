@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
     public float m_turnSpeed = 2f;
     public float m_maxSpeed = 5f;
     public float m_jumpPower = 0f;
+    public float m_health = 100f;
 
     private void Awake()
     {
@@ -118,5 +119,16 @@ public class PlayerController : MonoBehaviour {
     {
         rb.AddForce(m_jumpPower * Vector3.up);
         m_isGrounded = false;
+    }
+
+    private void Respawn()
+    {
+        m_health = 100f;
+    }
+
+    public void TakeDamage(float damageToTake)
+    {
+        m_health -= damageToTake;
+        UIController.Instance.timeText.text = "Health: " + Mathf.Round(m_health);
     }
 }
