@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
     public float m_maxSpeed = 5f;
     public float m_jumpPower = 0f;
     public float m_health = 100f;
+    public float m_maxHealth = 100f;
 
     private void Awake()
     {
@@ -129,6 +130,12 @@ public class PlayerController : MonoBehaviour {
     public void TakeDamage(float damageToTake)
     {
         m_health -= damageToTake;
+        UIController.Instance.timeText.text = "Health: " + Mathf.Round(m_health);
+    }
+
+    public void RecoverHealth(float healthToRecover)
+    {
+        m_health = Mathf.Min(m_maxHealth, m_health + healthToRecover);
         UIController.Instance.timeText.text = "Health: " + Mathf.Round(m_health);
     }
 }
