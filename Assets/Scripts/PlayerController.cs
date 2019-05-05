@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
 
         //movement
         rb.AddForce(m_moveSpeed * (verticalInput * cameraForwardNoY));
-        transform.Rotate(horizontalInput * Vector3.up);
+        rb.AddForce(m_moveSpeed * (horizontalInput * cameraRightNoY));
 
         //limit the velocity
         if (rb.velocity.magnitude > m_maxSpeed)
@@ -78,10 +78,10 @@ public class PlayerController : MonoBehaviour {
         rb.velocity = new Vector3(frictionAdjust * rb.velocity.x, Mathf.Min(maxVelocityY, rb.velocity.y), frictionAdjust * rb.velocity.z);
 
         //look in the direction of horizontal input over time
-        //if (Mathf.Abs(horizontalInput) > 0.2f)
-        //{
-        //    RotateTowardsTarget(transform.position + transform.TransformDirection(horizontalInput * Vector3.right), Mathf.Abs(horizontalInput) * m_turnSpeed);
-        //}
+        if (rb.velocity.magnitude > 0.2f)
+        {
+            RotateTowardsTarget(transform.position + rb.velocity, Mathf.Abs(rb.velocity.magnitude) * m_turnSpeed);
+        }
 
         //jumping
         if (abilityManager.canJump)
