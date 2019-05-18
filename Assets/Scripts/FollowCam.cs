@@ -60,6 +60,13 @@ public class FollowCam : MonoBehaviour {
         //orbit rotation
         float mouseXInput = Input.GetAxis("Mouse X");
         transform.Rotate(mouseXInput * Vector3.up, Space.World);
+
+        //pitch rotation
+        float mouseYInput = Input.GetAxis("Mouse Y");
+        float desiredYRot = transform.rotation.x + mouseYInput;
+            transform.Rotate(mouseYInput * Vector3.right, Space.Self);
+        //desiredYRot = Mathf.Clamp(desiredYRot, 0, 60);
+        //transform.rotation = Quaternion.Euler(new Vector3(desiredYRot, transform.rotation.y, transform.rotation.z));
     }
 
     public void UpdateFieldOfView(float playerSpeed)

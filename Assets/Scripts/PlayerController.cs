@@ -102,6 +102,15 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        //grappling
+        if (abilityManager.canGrapple)
+        {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                Grapple();
+            }
+        }
+
         //dashing
         if (abilityManager.canDash)
         {
@@ -158,6 +167,11 @@ public class PlayerController : MonoBehaviour {
     private void Dash()
     {
         StartCoroutine(Dashing());
+    }
+
+    private void Grapple()
+    {
+
     }
 
     IEnumerator Dashing()
