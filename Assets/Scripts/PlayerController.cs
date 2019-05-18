@@ -64,6 +64,12 @@ public class PlayerController : MonoBehaviour {
         rb.AddForce(m_moveSpeed * (verticalInput * cameraForwardNoY));
         rb.AddForce(m_moveSpeed * (horizontalInput * cameraRightNoY));
 
+        //update fov
+        float planarVelocity = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z);
+        {
+            FollowCam.Instance.UpdateFieldOfView(planarVelocity);
+        }
+
         //limit the velocity
         if (rb.velocity.magnitude > m_maxSpeed)
         {
@@ -91,6 +97,20 @@ public class PlayerController : MonoBehaviour {
                 if (m_isGrounded)
                 {
                     Jump();
+                }
+            }
+        }
+
+        //gliding
+        if (abilityManager.canFly)
+        {
+            if (Input.GetAxis("Glide") > 0.1f)
+            {
+                if (!m_isGrounded)
+                {
+                    Debug.Log("gliding");
+                    Vector3 vel = rb.velocity;
+                    rb.velocity = new Vector3(vel.x, 0.8f * vel.y, vel.z);
                 }
             }
         }
