@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowCam : MonoBehaviour {
+    public static FollowCam Instance;
+
     [SerializeField]
     Transform playerTransform;
 
@@ -11,9 +13,20 @@ public class FollowCam : MonoBehaviour {
 
     private float horInputAdjustFactor = 0.63f;
     private float horInputWarmth = 0f;
-	
-	// Update is called once per frame
-	void Update () {
+    private float normalFov;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        normalFov = cam.fieldOfView;
+    }
+
+    // Update is called once per frame
+    void Update () {
         //position on player
         transform.position = playerTransform.position;
 
@@ -47,5 +60,18 @@ public class FollowCam : MonoBehaviour {
         //orbit rotation
         float mouseXInput = Input.GetAxis("Mouse X");
         transform.Rotate(mouseXInput * Vector3.up, Space.World);
+
+        //pitch rotation
+        float mouseYInput = Input.GetAxis("Mouse Y");
+        float desiredYRot = transform.rotation.x + mouseYInput;
+            transform.Rotate(mouseYInput * Vector3.right, Space.Self);
+        //desiredYRot = Mathf.Clamp(desiredYRot, 0, 60);
+        //transform.rotation = Quaternion.Euler(new Vector3(desiredYRot, transform.rotation.y, transform.rotation.z));
+    }
+
+    public void UpdateFieldOfView(float playerSpeed)
+    {
+        float desiredFov = normalFov + playerSpeed;
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, desiredFov, Time.deltaTime);
     }
 }

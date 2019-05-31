@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
     public float m_turnSpeed = 2f;
     public float m_maxSpeed = 5f;
     public float m_jumpPower = 0f;
+    public float m_dashPower = 0f;
     public float m_health = 100f;
     public float m_maxHealth = 100f;
 
@@ -64,6 +65,12 @@ public class PlayerController : MonoBehaviour {
         rb.AddForce(m_moveSpeed * (verticalInput * cameraForwardNoY));
         rb.AddForce(m_moveSpeed * (horizontalInput * cameraRightNoY));
 
+        //update fov
+        float planarVelocity = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z);
+        {
+            FollowCam.Instance.UpdateFieldOfView(planarVelocity);
+        }
+
         //limit the velocity
         if (rb.velocity.magnitude > m_maxSpeed)
         {
@@ -95,6 +102,41 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        //grappling
+        if (abilityManager.canGrapple)
+        {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                Grapple();
+            }
+        }
+
+        //dashing
+        if (abilityManager.canDash)
+        {
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                if (m_isGrounded)
+                {
+                    Dash();
+                }
+            }
+        }
+
+        //gliding
+        if (abilityManager.canFly)
+        {
+            if (Input.GetAxis("Glide") > 0.1f)
+            {
+                if (!m_isGrounded)
+                {
+                    Debug.Log("gliding");
+                    Vector3 vel = rb.velocity;
+                    rb.velocity = new Vector3(vel.x, 0.8f * vel.y, vel.z);
+                }
+            }
+        }
+
         //check whether to ground
         if (!m_isGrounded)
         {
@@ -120,6 +162,28 @@ public class PlayerController : MonoBehaviour {
     {
         rb.AddForce(m_jumpPower * Vector3.up);
         m_isGrounded = false;
+    }
+
+    private void Dash()
+    {
+        StartCoroutine(Dashing());
+    }
+
+    private void Grapple()
+    {
+
+    }
+
+    IEnumerator Dashing()
+    {
+        Vector3 playerForward = transform.forward;
+        Vector3 playerForwardNoY = new Vector3(playerForward.x, 0, playerForward.z);
+
+        for (float f = 0f; f <= 0.4f; f += Time.deltaTime)
+        {
+            rb.AddForce(m_dashPower * playerForwardNoY);
+            yield return null;
+        }
     }
 
     private void Respawn()
