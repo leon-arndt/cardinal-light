@@ -7892,9 +7892,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 078a1c9a9febf074c81cefc9e3981e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_normalMoveSpeed: 30
-  m_moveSpeed: 30
-  m_runMultiplyFactor: 3
+  m_normalMoveSpeed: 24
+  m_moveSpeed: 24
+  m_runMultiplyFactor: 2.4
   m_turnSpeed: 2
   m_maxSpeed: 5
   m_jumpPower: 1000
