@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerController : MonoBehaviour {
     public static PlayerController Instance;
+    public List<Transform> followers = new List<Transform>();
     public Transform respawnLocation;
     public GameObject m_MaskGO;
 
@@ -72,7 +73,14 @@ public class PlayerController : MonoBehaviour {
         //attack
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            Attack();
+            if (m_wearingMask)
+            {
+                Dance();
+            }
+            else
+            {
+                Attack();
+            }
         }
 
         //movement
@@ -190,7 +198,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Dance()
     {
-
+        CombatManager.Instance.CreateDance(transform, transform.position);
     }
 
     private void ToggleMask()

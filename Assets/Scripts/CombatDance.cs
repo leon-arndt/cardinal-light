@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombatAttack : MonoBehaviour
+public class CombatDance : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,11 +14,7 @@ public class CombatAttack : MonoBehaviour
     {
         if (other.GetComponent<Enemy>())
         {
-            //only hurt unpacified enemies
-            if (other.GetComponent<Enemy>().m_pacified)
-            {
-                other.GetComponent<Enemy>().Damage(15f * Time.deltaTime);
-            }
+            other.GetComponent<Enemy>().IncreaseDanceCounter();
         }
     }
 }
