@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TreeLeaf_Dynamic_Mat
+  m_Shader: {fileID: -6465566751694194690, guid: 8a8e8d40b28310346a0c4e0378301af2,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    MotionVector: User
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_10746B6A:
+        m_Texture: {fileID: 2800000, guid: e12f74af65d20b9488a53439cfb5b20f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_685A368A:
+        m_Texture: {fileID: 2800000, guid: a90f7148fb9403240a581e40a9b51961, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_7B216876:
+        m_Texture: {fileID: 2800000, guid: e12f74af65d20b9488a53439cfb5b20f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_F7CDB2D9:
+        m_Texture: {fileID: 2800000, guid: c01278877540e2e41a751a753af26198, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2ED53B65_Texture:
+        m_Texture: {fileID: 2800000, guid: ef5f021d0f6332b428057709032c6cf6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_22C6764: 0.3301
+    - Vector1_2A007CA2: 0.33
+    - Vector1_317D2557: 3
+    - Vector1_4034CC61: -0.32
+    - Vector1_4912C4E: 2
+    - Vector1_64219F74: 0
+    - Vector1_6A3A3F0E: 0.15
+    - Vector1_6DE5800A: 0.041
+    - Vector1_B566F90C: 0.24
+    - Vector1_DC242E68: 10.87
+    m_Colors:
+    - Color_98337847: {r: 2, g: 2, b: 2, a: 0}
