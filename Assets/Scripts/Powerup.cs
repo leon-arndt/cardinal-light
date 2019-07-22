@@ -22,9 +22,6 @@ public class Powerup : MonoBehaviour {
                 case PowerType.Jump:
                     other.GetComponent<AbilityManager>().canJump = true;
                     break;
-                case PowerType.Climbing:
-                    other.GetComponent<AbilityManager>().canClimb = true;
-                    break;
                 case PowerType.Running:
                     other.GetComponent<AbilityManager>().canRun = true;
                     break;

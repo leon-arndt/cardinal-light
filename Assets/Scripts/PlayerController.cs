@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour {
         //running
         if (abilityManager.canRun)
         {
-            if (Input.GetAxis("Fire3") > 0.1f)
+            if (Input.GetKey(KeyCode.LeftShift)) //controller input
             {
                 m_moveSpeed = Mathf.Lerp(m_moveSpeed, m_normalMoveSpeed * m_runMultiplyFactor, 2f * Time.deltaTime);
             }
@@ -67,6 +67,12 @@ public class PlayerController : MonoBehaviour {
             {
                 m_moveSpeed = m_normalMoveSpeed;
             }
+        }
+
+        //attack
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Attack();
         }
 
         //movement
@@ -107,15 +113,6 @@ public class PlayerController : MonoBehaviour {
                 {
                     Jump();
                 }
-            }
-        }
-
-        //grappling
-        if (abilityManager.canGrapple)
-        {
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                Grapple();
             }
         }
 
@@ -186,7 +183,12 @@ public class PlayerController : MonoBehaviour {
         StartCoroutine(Dashing());
     }
 
-    private void Grapple()
+    private void Attack()
+    {
+        CombatManager.Instance.CreateAttack(transform, transform.position);
+    }
+
+    private void Dance()
     {
 
     }

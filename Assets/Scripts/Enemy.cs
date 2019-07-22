@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour {
 
     private float m_triggerDistance = 25f;
     private float m_moveSpeed = 2f;
+    private float m_health = 100f;
 
 	// Use this for initialization
 	void Start () {
@@ -37,5 +38,19 @@ public class Enemy : MonoBehaviour {
         {
             collision.transform.GetComponent<PlayerController>().TakeDamage(10f * Time.deltaTime);
         }
+    }
+
+    public void Damage(float damageToInflict)
+    {
+        m_health -= damageToInflict;
+        if (m_health < 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }
