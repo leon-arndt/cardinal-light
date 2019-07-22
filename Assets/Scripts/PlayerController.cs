@@ -9,12 +9,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     public static PlayerController Instance;
     public Transform respawnLocation;
+    public GameObject m_MaskGO;
 
     Rigidbody rb;
     AbilityManager abilityManager;
 
     private bool m_isGrounded = false;
 
+    public bool m_wearingMask = false;
     public float m_normalMoveSpeed = 30f;
     public float m_moveSpeed = 30f;
     public float m_runMultiplyFactor = 3f;
@@ -129,6 +131,15 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        //Toggle the Mask
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (abilityManager.hasMask)
+            {
+                ToggleMask();
+            }
+        }
+
         //gliding
         if (abilityManager.canFly)
         {
@@ -178,6 +189,12 @@ public class PlayerController : MonoBehaviour {
     private void Grapple()
     {
 
+    }
+
+    private void ToggleMask()
+    {
+        m_wearingMask = !m_wearingMask;
+        m_MaskGO.SetActive(m_wearingMask);
     }
 
     IEnumerator Dashing()
