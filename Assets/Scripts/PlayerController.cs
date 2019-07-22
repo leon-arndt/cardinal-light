@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerController : MonoBehaviour {
     public static PlayerController Instance;
+    public Transform respawnLocation;
 
     Rigidbody rb;
     AbilityManager abilityManager;
@@ -33,6 +34,11 @@ public class PlayerController : MonoBehaviour {
     void Start () {
         rb = GetComponent<Rigidbody>();
         abilityManager = GetComponent<AbilityManager>();
+
+        //dynamically create a default respawn before the player reaches first well
+        GameObject defaultRespawnLocation = new GameObject("Default Respawn Location");
+        defaultRespawnLocation.transform.position = transform.position;
+        respawnLocation = defaultRespawnLocation.transform;
     }
 	
 	// Update is called once per frame
@@ -189,12 +195,17 @@ public class PlayerController : MonoBehaviour {
     private void Respawn()
     {
         m_health = 100f;
+        transform.position = respawnLocation.position;
     }
 
     public void TakeDamage(float damageToTake)
     {
         m_health -= damageToTake;
         UIController.Instance.timeText.text = "Health: " + Mathf.Round(m_health);
+        if (m_health < 0)
+        {
+            Respawn();
+        }
     }
 
     public void RecoverHealth(float healthToRecover)

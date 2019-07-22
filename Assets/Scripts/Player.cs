@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//This script is not used
 public class Player : MonoBehaviour {
     public bool canFly;
     public bool canClimb;

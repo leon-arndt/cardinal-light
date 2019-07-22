@@ -6161,6 +6161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 078a1c9a9febf074c81cefc9e3981e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnLocation: {fileID: 0}
   m_normalMoveSpeed: 24
   m_moveSpeed: 24
   m_runMultiplyFactor: 2.4
@@ -7027,21 +7028,6 @@ PrefabInstance:
     - target: {fileID: 8373277820108669315, guid: 925b38d7c6fbe854db5fe50e36ee16b0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8373277820646547105, guid: 925b38d7c6fbe854db5fe50e36ee16b0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8373277818821310680, guid: 925b38d7c6fbe854db5fe50e36ee16b0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8373277819629788798, guid: 925b38d7c6fbe854db5fe50e36ee16b0,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
